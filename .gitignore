@@ -1,0 +1,42 @@
+*main.c
+*main.py 
+*10-linked_lists.c
+*10-main.c
+# Compiled Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+
+# Environment-specific settings
+.env
+
+# Development and IDE files
+.idea/
+.vscode/
+*.bak
+*.swp
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Dependency directories
+dist/
+build/
+*.egg-info/
+
+# Compiled files
+*.exe
+*.dll
+*.so
+*.pyd
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+*.coverage.*
