@@ -12,10 +12,10 @@ int is_palindrome(listint_t **head)
 
 	if (*head == NULL)
 		return (1);
-	while (fast_ptr && slow_ptr->next)
+	while (fast_ptr && fast_ptr->next)
 	{
 		slow_ptr = slow_ptr->next;
-		fast_ptr = fast_ptr->next;
+		fast_ptr = fast_ptr->next->next;
 	}
 	rev_list = fast_ptr ? slow_ptr->next : slow_ptr;
 	reverse_listint(&rev_list);
