@@ -28,7 +28,7 @@ class Square:
             int: size of the suare
         """
         return self.__size
-    
+
     @size.setter
     def size(self, value):
         """
@@ -61,11 +61,11 @@ class Square:
     def __ne__(self, other):
         """Compare if two squares have unequal areas"""
         return self.area() != other.area()
-    
+
     def __gt__(self, other):
         """Compare if one square has a greater area than the other"""
         return self.area() > other.area()
-    
+
     def __ge__(self, other):
         """Compare if one square has a greater or equal area than the other"""
         return self.area() >= other.area()
@@ -73,8 +73,7 @@ class Square:
     def __lt__(self, other):
         """Compare if one square has a smaller area than the other"""
         return self.area() < other.area()
-    
+
     def __le__(self, other):
         """Compare if one square has a smaller or equal area than the other"""
         return self.area() <= other.area()
-    
