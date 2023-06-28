@@ -10,7 +10,7 @@ class Square:
             __size: private size of the square
     """
 
-    def __init__(self, size):
+    def __init__(self, size=0):
         """
         Initializes a square object with given size
 
@@ -54,4 +54,4 @@ class Square:
         Returns:
             int: Area of square
         """
-        return self.__size ** 2
+        return self.__size * self.__size
