@@ -7,4 +7,4 @@ class LockedClass:
     """
     Representation of a locked class
     """
-    __slots = "fist_name"
+    __slots__ = "fist_name"
