@@ -1,0 +1,38 @@
+import ```say_my_name``` from the ```say_my_name``` module
+
+		>>> say_my_name = __import__('3-say_my_name').say_my_name
+
+Use:
+		>>> say_my_name("Catherine", "Kimani")
+		My name is Catherine Kimani
+
+		>>> say_my_name("Catherine Wambui", "Kimani")
+		My name is Catherine Wambui Kimani
+
+		>>> say_my_name("", "")
+		My name is  
+
+		>>> say_my_name("Kate")
+		My name is Kate 
+
+		Invalid Names
+
+		>>> say_my_name(15, "Kate")
+		Traceback (most recent call last):
+		TypeError: first_name must be a string
+
+		>>> say_my_name("Python", ["Alx", "Level", "Programming"])
+		Traceback (most recent call last):
+		TypeError: last_name must be a string
+
+		>>> say_my_name({"John": 43, "Kay": 26}, 15.5)
+		Traceback (most recent call last):
+		TypeError: first_name must be a string
+
+		>>> say_my_name(None)
+		Traceback (most recent call last):
+		TypeError: first_name must be a string
+
+		>>> say_my_name()
+		Traceback (most recent call last):
+		TypeError: say_my_name() missing 1 required positional argument: 'first_name'
