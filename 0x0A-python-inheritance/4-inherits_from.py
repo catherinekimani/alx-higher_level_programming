@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-""" """
+""" Define a function to check instance """
 
 
 def inherits_from(obj, a_class):
