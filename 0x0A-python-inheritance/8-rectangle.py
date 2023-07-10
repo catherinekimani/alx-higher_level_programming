@@ -8,12 +8,15 @@ class Rectangle(BaseGeometry):
     """
     Representation of a class Rectangle that
     inherits BaseGeometry class
-
-    Args:
-        width (int): width of the rect
-        height (int): height of the rect
     """
     def __init__(self, width, height):
+        """
+        Initialize a Rectangle
+
+            Args:
+                width (int): width of the rect
+                height (int): height of the rect
+        """
         self.integer_validator("width", width)
         self.__width = width
         self.integer_validator("height", height)
