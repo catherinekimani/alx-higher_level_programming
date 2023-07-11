@@ -1,0 +1,42 @@
+``1-my_list`` module
+
+Import function from module:
+		>>> MyList = __import__('1-my_list').MyList
+
+Module Docstring Check:
+		>>> m_d = __import__("1-my_list").__doc__
+		>>> len(m_d) > 1
+		True
+
+Class Docstring Check:
+		>>> c_d = __import__("1-my_list").MyList.__doc__
+		>>> len(c_d) > 1
+		True
+
+Method Docstring Check:
+		>>> m_d = __import__("1-my_list").MyList.print_sorted.__doc__
+		>>> len(m_d) > 1
+		True
+
+Empty List Check:
+		>>> em_l = MyList()
+		>>> em_l.print_sorted()
+		[]
+
+Check if MyList inherits from list:
+		>>> issubclass(MyList, list)
+		True
+
+Negative Numbers Check:
+	 >>> l = MyList()
+	 >>> l.append(-10)
+	 >>> l.append(-1)
+	 >>> l.append(-7)
+	 >>> l.append(-2)
+	 >>> l.append(-8)
+	 >>> print(l)
+	 [-10, -1, -7, -2, -8]
+	 >>> l.print_sorted()
+	 [-10, -8, -7, -2, -1]
+	 >>> print(l)
+         [-10, -1, -7, -2, -8]
