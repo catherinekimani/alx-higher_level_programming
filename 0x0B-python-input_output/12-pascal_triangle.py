@@ -16,5 +16,5 @@ def pascal_triangle(n):
     for _ in range(n - 1):
         prev_row = triangle[-1]
         new_row = [l1 + r for l1, r in zip([0] + prev_row, prev_row + [0])]
-        triangle.ap(new_row)
+        triangle.append(new_row)
     return triangle
