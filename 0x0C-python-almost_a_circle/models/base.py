@@ -3,6 +3,7 @@
 """ Define a class name Base """
 import json
 import csv
+import turtle
 
 
 class Base:
@@ -80,7 +81,7 @@ class Base:
                     field_names = ["id", "width", "height", "x", "y"]
                 else:
                     field_names = ["id", "size", "x", "y"]
-                writer = csv.DictWriter(a_file, field_names=field_names)
+                writer = csv.DictWriter(a_file, fieldnames=field_names)
                 for obj in list_objs:
                     writer.writerow(obj.to_dictionary())
 
@@ -94,9 +95,50 @@ class Base:
                     field_names = ["id", "width", "height", "x", "y"]
                 else:
                     field_names = ["id", "size", "x", "y"]
-                rows = csv.DictReader(a_file, field_names=field_names)
+                rows = csv.DictReader(a_file, fieldnames=field_names)
                 data = [dict((k, int(v)) for k, v in row.items())
                         for row in rows]
                 return [cls.create(**d) for d in data]
         except IOError:
             return []
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        """
+        Opens a window using the Turtle graphics module and
+        draws all the rectangles and squares
+        args:
+            list_rectangles (list): list of rectangle objs
+            list_squares (list): list of square objects
+        """
+        turtle_obj = turtle.Turtle()
+        turtle_obj.screen.bgcolor("#B2EBF2")
+        turtle_obj.pensize(3)
+        turtle_obj.shape("turtle")
+
+        turtle_obj.color("#ffffff")
+        for rect in list_rectangles:
+            turtle_obj.showturtle()
+            turtle_obj.up()
+            turtle_obj.goto(rect.x, rect.y)
+            turtle_obj.down()
+            for idx in range(2):
+                turtle_obj.forward(rect.width)
+                turtle_obj.left(90)
+                turtle_obj.forward(rect.height)
+                turtle_obj.left(90)
+            turtle_obj.hideturtle()
+
+        turtle_obj.color("#C3D9E8")
+        for square in list_squares:
+            turtle_obj.showturtle()
+            turtle_obj.up()
+            turtle_obj.goto(square.x, square.y)
+            turtle_obj.down()
+            for idx in range(2):
+                turtle_obj.forward(square.width)
+                turtle_obj.left(90)
+                turtle_obj.forward(square.height)
+                turtle_obj.left(90)
+            turtle_obj.hideturtle()
+        turtle.exitonclick()
