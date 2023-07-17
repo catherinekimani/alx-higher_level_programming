@@ -27,6 +27,7 @@ class Rectangle(Base):
     def width(self):
         """ Get the width of the rect """
         return self.__width
+
     @width.setter
     def width(self, value):
         """ Set the width of the rect """
@@ -35,10 +36,12 @@ class Rectangle(Base):
         if value <= 0:
             raise ValueError("width must be > 0")
         self.__width = value
+
     @property
     def height(self):
         """ Get the height of the rect """
         return self.__height
+
     @height.setter
     def height(self, value):
         """ Set the height of the rect """
@@ -47,10 +50,12 @@ class Rectangle(Base):
         if value <= 0:
             raise ValueError("height must be > 0")
         self.__height = value
+
     @property
     def x(self):
         """ Get the x coordinate of the rect's position """
         return self.__x
+
     @x.setter
     def x(self, value):
         """ set the x coordinate of the rect's position """
@@ -59,10 +64,12 @@ class Rectangle(Base):
         if value < 0:
             raise ValueError("x must be >= 0")
         self.__x = value
+
     @property
     def y(self):
         """ Get the y coordinate of the rect's position """
         return self.__y
+
     @y.setter
     def y(self, value):
         """ set the y coordinate of the rect's position """
@@ -71,3 +78,20 @@ class Rectangle(Base):
         if value < 0:
             raise ValueError("y must be >= 0")
         self.__y = value
+
+    def area(self):
+        """
+        Calculates and returns area of the rectangle
+        """
+        return self.width * self.height
+
+    def display(self):
+        """ Display the rectangle using '#' character """
+        if self.width == 0 or self.height == 0:
+            print("")
+            return
+        [print("") for _ in range(self.y)]
+        for _ in range(self.height):
+            [print(" ", end="") for _ in range(self.x)]
+            [print("#", end="") for _ in range(self.width)]
+            print("")
