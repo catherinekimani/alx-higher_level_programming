@@ -49,7 +49,8 @@ class TestBase(unittest.TestCase):
         dict_2 = {"name": "Rael", "age": 16}
         result = Base.to_json_string([dict_1, dict_2])
         self.assertEqual(
-            result, '[{"name": "Kate", "age": 10},{"name": "Rael", "age": 16}]'
+            result,
+            '[{"name": "Kate", "age": 10}, {"name": "Rael", "age": 16}]'
             )
 
     def test_save_to_file_with_empty_list(self):
