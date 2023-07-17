@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-from models.base import Base
+
 """ Define a class Rectangle the inherits from Base """
+from models.base import Base
 
 
 class Rectangle(Base):
@@ -16,48 +17,57 @@ class Rectangle(Base):
             y (int): cordinate of the rect's position
             id (int): id value
         """
-        super().__init__(id)
         self.width = width
         self.height = height
         self.x = x
         self.y = y
+        super().__init__(id)
 
-        @property
-        def width(self):
-            """ Get the width of the rect """
-            return self.__width
-
-        @width.setter
-        def width(self, value):
-            """ Set the width of the rect """
-            self.__width = value
-
-        @property
-        def height(self):
-            """ Get the height of the rect """
-            return self.__height
-
-        @height.setter
-        def height(self, value):
-            """ Set the height of the rect """
-            self.__height = value
-
-        @property
-        def x(self):
-            """ Get the x coordinate of the rect's position """
-            return self.__x
-
-        @x.setter
-        def x(self, value):
-            """ set the x coordinate of the rect's position """
-            self.__x = value
-
-        @property
-        def y(self):
-            """ Get the y coordinate of the rect's position """
-            return self.__y
-
-        @y.setter
-        def y(self, value):
-            """ set the y coordinate of the rect's position """
-            self.__y = value
+    @property
+    def width(self):
+        """ Get the width of the rect """
+        return self.__width
+    @width.setter
+    def width(self, value):
+        """ Set the width of the rect """
+        if not isinstance(value, int):
+            raise TypeError("width must be an integer")
+        if value <= 0:
+            raise ValueError("width must be > 0")
+        self.__width = value
+    @property
+    def height(self):
+        """ Get the height of the rect """
+        return self.__height
+    @height.setter
+    def height(self, value):
+        """ Set the height of the rect """
+        if not isinstance(value, int):
+            raise TypeError("height must be an integer")
+        if value <= 0:
+            raise ValueError("height must be > 0")
+        self.__height = value
+    @property
+    def x(self):
+        """ Get the x coordinate of the rect's position """
+        return self.__x
+    @x.setter
+    def x(self, value):
+        """ set the x coordinate of the rect's position """
+        if not isinstance(value, int):
+            raise TypeError("x must be an integer")
+        if value < 0:
+            raise ValueError("x must be >= 0")
+        self.__x = value
+    @property
+    def y(self):
+        """ Get the y coordinate of the rect's position """
+        return self.__y
+    @y.setter
+    def y(self, value):
+        """ set the y coordinate of the rect's position """
+        if not isinstance(value, int):
+            raise TypeError("y must be an integer")
+        if value < 0:
+            raise ValueError("y must be >= 0")
+        self.__y = value
