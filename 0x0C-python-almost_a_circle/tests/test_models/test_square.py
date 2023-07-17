@@ -99,6 +99,33 @@ class SquareTestCase(unittest.TestCase):
         }
         self.assertEqual(self.square.to_dictionary(), expected_dict)
 
+    def test_to_dictionary_output(self):
+        """
+        Test case to verify the output of the to_dictionary method
+        """
+        s = Square(10, 2, 1, 1)
+        correct = {'id': 1, 'x': 2, 'size': 10, 'y': 1}
+        self.assertDictEqual(correct, s.to_dictionary())
+
+    def test_to_dictionary_no_object_changes(self):
+        """
+        Test case to ensure that the to_dictionary method does
+        not modify the state of the Square object
+        """
+        s1 = Square(10, 2, 1, 2)
+        s2 = Square(1, 2, 10)
+        s2.update(**s1.to_dictionary())
+        self.assertNotEqual(s1, s2)
+
+    def test_to_dictionary_arg(self):
+        """
+        Test case to check if calling to_dictionary with an
+        arg other than self raises a TypeError.
+        """
+        sq = Square(10, 10, 10, 10)
+        with self.assertRaises(TypeError):
+            sq.to_dictionary(1)
+
     def test_area(self):
         """ test the area method of the Square class """
         self.assertEqual(self.square.area(), 25)
