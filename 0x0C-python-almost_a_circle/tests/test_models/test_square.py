@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""Defines unittests for Square class."""
+
+
 import unittest
 from models.square import Square
 
@@ -94,12 +98,13 @@ class SquareTestCase(unittest.TestCase):
             "y": 3,
         }
         self.assertEqual(self.square.to_dictionary(), expected_dict)
-    
+
     def test_area(self):
         """ test the area method of the Square class """
         self.assertEqual(self.square.area(), 25)
         self.square.size = 8
         self.assertEqual(self.square.area(), 64)
+
 
 if __name__ == '__main__':
     unittest.main()

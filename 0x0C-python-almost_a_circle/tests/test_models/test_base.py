@@ -8,7 +8,9 @@ from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
 
+
 class TestBase(unittest.TestCase):
+
     def setUp(self):
         Base._Base__nb_objects = 0
 
@@ -29,25 +31,26 @@ class TestBase(unittest.TestCase):
         """ Test to_json_string with an empty list """
         result = Base.to_json_string([])
         self.assertEqual(result, "[]")
-    
+
     def test_to_json_string_none(self):
         """ Test to_json_string with None """
         result = Base.to_json_string(None)
         self.assertEqual(result, "[]")
-    
+
     def test_to_json_string_single_dict(self):
         """ Test to_json_string with a single dictionary """
         my_dict = {"name": "Kate", "age": 10}
         result = Base.to_json_string([my_dict])
         self.assertEqual(result, '[{"name": "Kate", "age": 10}]')
-    
+
     def test_to_json_string_multiple_dicts(self):
         """ Test to_json_string with multiple dictionaries """
         dict_1 = {"name": "Kate", "age": 10}
         dict_2 = {"name": "Rael", "age": 16}
         result = Base.to_json_string([dict_1, dict_2])
         self.assertEqual(
-            result, '[{"name": "Kate", "age": 10}, {"name": "Rael", "age": 16}]')
+            result, '[{"name": "Kate", "age": 10},{"name": "Rael", "age": 16}]'
+            )
 
     def test_save_to_file_with_empty_list(self):
         """ Test empty file"""
@@ -55,13 +58,13 @@ class TestBase(unittest.TestCase):
         with open("Base.json") as a_file:
             file_content = a_file.read()
             self.assertEqual(file_content, "[]")
-    
+
     def test_save_to_file_with_none(self):
         Base.save_to_file(None)
         with open("Base.json") as a_file:
             file_content = a_file.read()
             self.assertEqual(file_content, "[]")
-            
+
     def test_create(self):
         """Test create method with Rectangle class"""
         rect_dict = {'id': 1, 'width': 10, 'height': 5}
@@ -97,6 +100,7 @@ def test_load_from_file(self):
 
     # Delete created file
     os.remove("Rectangle.json")
+
 
 if __name__ == "__main__":
     unittest.main()
