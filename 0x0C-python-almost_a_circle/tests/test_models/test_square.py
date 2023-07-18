@@ -2,6 +2,7 @@
 """Defines unittests for Square class."""
 
 
+import os
 import unittest
 from models.square import Square
 
@@ -131,6 +132,61 @@ class SquareTestCase(unittest.TestCase):
         self.assertEqual(self.square.area(), 25)
         self.square.size = 8
         self.assertEqual(self.square.area(), 64)
+
+    def test_save_to_file_none(self):
+        """ Test saving none squares to a file """
+        Square.save_to_file(None)
+        file_exists = os.path.isfile("Square.json")
+        self.assertTrue(file_exists)
+        with open("Square.json", "r") as a_file:
+            file_contents = a_file.read()
+            self.assertEqual(file_contents, "[]")
+
+    def test_save_to_file(self):
+        """ Test saving the squares of a file"""
+        sq_list = [Square(3, 1, 2, 4), Square(4, 5, 6, 5)]
+        Square.save_to_file(sq_list)
+        with open("Square.json", "r") as a_file:
+            file_contents = a_file.read()
+            expect = '[{"id": 4, "size": 3, "x": 1, "y": 2}, ' \
+                '{"id": 5, "size": 4, "x": 5, "y": 6}]'
+            self.assertEqual(file_contents, expect)
+
+    def test_save_to_file_empty_list(self):
+        """ Test saving an empty list of squares to a file """
+        sq = []
+        Square.save_to_file(sq)
+        with open("Square.json", "r") as a_file:
+            file_contents = a_file.read()
+            self.assertEqual(file_contents, "[]")
+
+    def test_save_to_file_single_square(self):
+        """ Test saving a single square to a file """
+        sq = [Square(1, id=1)]
+        Square.save_to_file(sq)
+        with open("Square.json", "r") as a_file:
+            file_contents = a_file.read()
+        expected = '[{"id": 1, "size": 1, "x": 0, "y": 0}]'
+        self.assertEqual(file_contents, expected)
+
+    def test_save_to_file_not_exist(self):
+        """ test loading squares from a file that does not exist """
+        if os.path.exists("Square.json"):
+            os.remove("Square.json")
+        sq = Square.load_from_file()
+        self.assertEqual(sq, [])
+
+    def test_save_to_file_exist(self):
+        """Test loading squares from an existing file"""
+        sq = [Square(3, 1, 2, 4), Square(4, 5, 6, 5)]
+        Square.save_to_file(sq)
+        loaded_sq = Square.load_from_file()
+
+        for orig_sq, loaded_square in zip(sq, loaded_sq):
+            self.assertEqual(orig_sq.size, loaded_square.size)
+            self.assertEqual(orig_sq.x, loaded_square.x)
+            self.assertEqual(orig_sq.y, loaded_square.y)
+            self.assertEqual(orig_sq.id, loaded_square.id)
 
 
 if __name__ == '__main__':
