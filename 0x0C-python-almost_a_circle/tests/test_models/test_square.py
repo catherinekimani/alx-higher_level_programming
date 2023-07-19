@@ -44,6 +44,28 @@ class SquareTestCase(unittest.TestCase):
         self.assertEqual(self.square.y, 3)
         self.assertEqual(self.square.id, 1)
 
+    def test_valid_square(self):
+        """ test creating a valid square instance """
+        sq = Square(1, 2, 3, 4)
+        self.assertEqual(sq.size, 1)
+        self.assertEqual(sq.x, 2)
+        self.assertEqual(sq.y, 3)
+        self.assertEqual(sq.id, 4)
+
+    def test_valid_square_without_y(self):
+        """ test creating a square without y """
+        sq = Square(1, 2, 3)
+        self.assertEqual(sq.size, 1)
+        self.assertEqual(sq.x, 2)
+        self.assertEqual(sq.y, 3)
+
+    def test_valid_square_only_size(self):
+        """ test creating a square with the size parameter only """
+        sq = Square(1)
+        self.assertEqual(sq.size, 1)
+        self.assertEqual(sq.y, 0)
+        self.assertEqual(sq.y, 0)
+
     def test_str(self):
         """ Test the __str__ method of te Square class """
         self.assertEqual(str(self.square), "[Square] (1) 2/3 - 5")
@@ -56,20 +78,55 @@ class SquareTestCase(unittest.TestCase):
         self.assertEqual(self.square.width, 10)
         self.assertEqual(self.square.height, 10)
 
+    def test_invalid_size(self):
+        """ test create a square with an invalid y """
+        with self.assertRaises(TypeError):
+            Square("1", 2, 3, 1)
+
     def test_update_invalid_size(self):
         """ Test update method with invalid size """
         with self.assertRaises(ValueError):
             self.square.update(2, -2, 4, 6)
+
+    def test_negative_size(self):
+        """ test creating a square with a -ve size """
+        with self.assertRaises(ValueError):
+            Square(-1, 2, 3, 1)
+
+    def test_negative_size_and_x(self):
+        """ test creating a square with a -ve size & x """
+        with self.assertRaises(ValueError):
+            Square(1, -2, 3, 1)
+
+    def test_negative_size_x_y(self):
+        """ test creating a square with a -ve size, x & y """
+        with self.assertRaises(ValueError):
+            Square(1, 2, -3, 1)
+
+    def test_zero_size(self):
+        """ test create a square with size 0 """
+        with self.assertRaises(ValueError):
+            Square(0, 2, 3, 1)
 
     def test_update_invalid_x(self):
         """ Test update method with invalid x """
         with self.assertRaises(ValueError):
             self.square.update(2, 2, -4, 6)
 
+    def test_invalid_x(self):
+        """ test create a square with an invalid x """
+        with self.assertRaises(TypeError):
+            Square(1, "2", 3, 1)
+
     def test_update_invalid_y(self):
         """ Test the update method with invalid y """
         with self.assertRaises(ValueError):
             self.square.update(2, 7, 4, -6)
+
+    def test_invalid_y(self):
+        """ test create a square with an invalid y """
+        with self.assertRaises(TypeError):
+            Square(1, 2, "3", 1)
 
     def test_update_with_args(self):
         """ Test the update method of the Square class with args"""
