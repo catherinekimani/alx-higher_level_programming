@@ -2,6 +2,9 @@
 """Defines unittests for Rectangle class."""
 
 
+import os
+import io
+from contextlib import redirect_stdout
 import unittest
 from models.rectangle import Rectangle
 
@@ -285,6 +288,19 @@ class TestRectangle(unittest.TestCase):
         """Test the display method"""
         self.rect.display()
 
+    def test_display_no_x_y(self):
+        """ Test the display method without x and y """
+        rect = Rectangle(5, 5)
+        expected = "#####\n" \
+                   "#####\n" \
+                   "#####\n" \
+                   "#####\n" \
+                   "#####\n"
+        with io.StringIO() as buffer, redirect_stdout(buffer):
+            rect.display()
+            output = buffer.getvalue()
+        self.assertEqual(output, expected)
+
     def test_update(self):
         """
         Test update method
@@ -356,6 +372,58 @@ class TestRectangle(unittest.TestCase):
         }
         # Check generated dictionary
         self.assertDictEqual(self.rect.to_dictionary(), dict)
+
+    def test_save_to_file_none(self):
+        """ Test saving none rectangles to a file """
+        Rectangle.save_to_file(None)
+        file_exists = os.path.isfile("Rectangle.json")
+        self.assertTrue(file_exists)
+        with open("Rectangle.json", "r") as a_file:
+            file_contents = a_file.read()
+            self.assertEqual(file_contents, "[]")
+
+    def test_save_to_file_empty_list(self):
+        """ Test saving an empty list of rectangles to a file """
+        sq = []
+        Rectangle.save_to_file(sq)
+        with open("Rectangle.json", "r") as a_file:
+            file_contents = a_file.read()
+            self.assertEqual(file_contents, "[]")
+
+    def test_save_to_file_single_rectangle(self):
+        """ Test saving a single square to a file """
+        rect = [Rectangle(1, 2, id=1)]
+        Rectangle.save_to_file(rect)
+        file_exists = os.path.isfile("Rectangle.json")
+        self.assertTrue(file_exists)
+        with open("Rectangle.json", "r") as a_file:
+            file_contents = a_file.read()
+        expected = '[{"id": 1, "width": 1, "height": 2, "x": 0, "y": 0}]'
+        self.assertEqual(file_contents, expected)
+
+    def test_save_to_file_not_exist(self):
+        """ test loading rectangles from a file that does not exist """
+        if os.path.exists("Rectangle.json"):
+            os.remove("Rectangle.json")
+        rect = Rectangle.load_from_file()
+        self.assertEqual(rect, [])
+
+    def test_load_from_file_exist(self):
+        """Test loading rectangles from an existing file"""
+        rects = [
+            Rectangle(1, 2, id=1),
+            Rectangle(3, 4, id=2),
+            Rectangle(5, 6, id=3)
+        ]
+        Rectangle.save_to_file(rects)
+        loaded_rects = Rectangle.load_from_file()
+        self.assertEqual(len(loaded_rects), len(rects))
+        for idx in range(len(rects)):
+            self.assertEqual(loaded_rects[idx].id, rects[idx].id)
+            self.assertEqual(loaded_rects[idx].width, rects[idx].width)
+            self.assertEqual(loaded_rects[idx].height, rects[idx].height)
+            self.assertEqual(loaded_rects[idx].x, rects[idx].x)
+            self.assertEqual(loaded_rects[idx].y, rects[idx].y)
 
 
 if __name__ == '__main__':
