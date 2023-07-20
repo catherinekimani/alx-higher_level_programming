@@ -4,7 +4,10 @@
 
 import os
 import io
+from io import StringIO
+import sys
 from contextlib import redirect_stdout
+from unittest.mock import patch
 import unittest
 from models.rectangle import Rectangle
 
@@ -287,6 +290,33 @@ class TestRectangle(unittest.TestCase):
     def test_display(self):
         """Test the display method"""
         self.rect.display()
+
+    def test_display_exist(self):
+        """Test the display method if it exists """
+        rect = Rectangle(5, 3)  # width=5 and height=3
+        expected = "#####\n#####\n#####\n"
+        with io.StringIO() as buffer, redirect_stdout(buffer):
+            rect.display()
+            output = buffer.getvalue()
+        self.assertEqual(output, expected)
+
+    def test_display_no_y(self):
+        """Test the display method without y"""
+        rect = Rectangle(
+            5, 5, 2)  # width=5, height=5, and x=2
+        expected_width = 5
+        expected_height = 5
+
+        with io.StringIO() as buffer, redirect_stdout(buffer):
+            rect.display()
+            output = buffer.getvalue()
+        expected = ' ' * 2 + '#' * expected_width + '\n'
+        expected = expected * expected_height
+        self.assertEqual(output, expected)
+        lines = output.strip().split('\n')
+        for line in lines:
+            self.assertEqual(len(line.strip()), expected_width)
+        self.assertEqual(len(lines), expected_height)
 
     def test_display_no_x_y(self):
         """ Test the display method without x and y """
