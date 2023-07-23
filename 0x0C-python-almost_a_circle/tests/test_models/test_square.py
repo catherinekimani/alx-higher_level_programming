@@ -52,6 +52,13 @@ class SquareTestCase(unittest.TestCase):
         self.assertEqual(sq.y, 3)
         self.assertEqual(sq.id, 4)
 
+    def test_square_create(self):
+        """ Test to create a square with 1, 2 inputs """
+        sq = Square(1, 2)
+        self.assertEqual(sq.size, 1)
+        self.assertEqual(sq.x, 2)
+        self.assertEqual(sq.y, 0)
+
     def test_valid_square_without_y(self):
         """ test creating a square without y """
         sq = Square(1, 2, 3)
