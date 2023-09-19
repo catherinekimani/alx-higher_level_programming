@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     my_session.add(my_obj)
     my_session.commit()
-    print(my_obj)
+    print(my_obj.id)
 
     # close session
     my_session.close()

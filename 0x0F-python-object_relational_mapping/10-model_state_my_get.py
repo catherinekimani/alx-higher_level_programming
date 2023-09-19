@@ -21,14 +21,12 @@ if __name__ == "__main__":
 
     my_session = my_session_maker()
 
-    state = my_session.query(State).order_by(State.id).first()
-
     for state in my_session.query(State):
         if argv[4] == state.name:
             print("{}".format(state.id))
             break
-        else:
-            print("Not found")
+    else:
+        print("Not found")
 
     # close session
     my_session.close()
