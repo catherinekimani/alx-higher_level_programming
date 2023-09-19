@@ -17,15 +17,15 @@ if __name__ == "__main__":
         pool_pre_ping=True
     )
 
-my_session_maker = sessionmaker(bind=engine)
+    my_session_maker = sessionmaker(bind=engine)
 
-my_session = my_session_maker()
+    my_session = my_session_maker()
 
-state = my_session.query(State).order_by(State.id).first()
+    state = my_session.query(State).order_by(State.id).first()
 
-for state in my_session.query(State).order_by(State.id):
-    if "a" in state.name:
-        print("{}: {}".format(state.id, state.name))
+    for state in my_session.query(State).order_by(State.id):
+        if "a" in state.name:
+            print("{}: {}".format(state.id, state.name))
 
-# close session
-my_session.close()
+    # close session
+    my_session.close()
