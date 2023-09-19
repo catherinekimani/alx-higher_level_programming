@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-script that prints the first State object from the db hbtn_0e_6_usa
+script that prints the first State object from the database hbtn_0e_6_usa
 """
 
 
@@ -14,17 +14,18 @@ if __name__ == "__main__":
     engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
         argv[1], argv[2], argv[3]), pool_pre_ping=True)
 
-my_session_maker = sessionmaker(bind=engine)
+    my_session_maker = sessionmaker(bind=engine)
 
-my_session = my_session_maker()
+    my_session = my_session_maker()
 
-Base.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
 
-state = my_session.query(State).order_by(State.id).first()
+    state = my_session.query(State).order_by(State.id).first()
 
-if state is None:
-    print("Nothing")
-else:
-    print("{}: {}".format(state.id, state.name))
-# close session
-my_session.close()
+    if state:
+        print("{}: {}".format(state.id, state.name))
+    else:
+        print("Nothing")
+
+    # close session
+    my_session.close()
